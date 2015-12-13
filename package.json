@@ -1,0 +1,33 @@
+{
+  "name": "postcss-safe-important",
+  "version": "1.0.0",
+  "description": "PostCSS plugin that adds !important to style declarations safely",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "important",
+    "cleanslate",
+    "declaration",
+    "gulp",
+    "grunt",
+    "weight"
+  ],
+  "author": "StrayBugs <straybugs@gmail.com>",
+  "license": "MIT",
+  "repository": "Crimx/postcss-safe-important",
+  "bugs": {
+    "url": "https://github.com/Crimx/postcss-safe-important/issues"
+  },
+  "homepage": "https://github.com/Crimx/postcss-safe-important",
+  "dependencies": {
+    "postcss": "^5.0.10"
+  },
+  "devDependencies": {
+    "ava": "^0.7.0",
+    "eslint": "^1.10.2"
+  },
+  "scripts": {
+    "test": "ava && eslint *.js"
+  }
+}
