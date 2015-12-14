@@ -50,7 +50,7 @@ Adding `!important` to every declarations might break your style. For example, [
 ```css
 /* Output example */
 .foo {
-    width: 100px; !important
+    width: 100px !important;
     color: #000; }
 
 .bar {
