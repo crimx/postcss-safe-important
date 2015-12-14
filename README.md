@@ -24,7 +24,7 @@ Quote from [Cleanslate](http://cleanslatecss.com/#Why-would-I-need-it)
 > However, iframes have some drawbacks: * You cannot display content outside of the box of the iframe * It is tricky to resize the iframe to match the size of its contents * Your content will be unable to interact with the host page, even if it is trusted * Search engines like Google will not see the content on the host page. Content that is syndicated from a partner website can avoid this by being directly included in the host page.
 
 
-Whether you use extreme CSS reset stylesheet like Cleanslate to distribut content to third-party websites, or simply just want to give maximum weight for all your declarations, don't do it manually! Use [postcss-safe-important] to keep your source styles clean and portable. 
+Whether you work with extreme CSS reset stylesheet like Cleanslate or simply just want to give maximum weight for all your declarations, don't do it manually! Use [postcss-safe-important] to keep your source styles clean and portable. 
 
 ## Safe?
 
