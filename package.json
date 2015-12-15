@@ -1,6 +1,6 @@
 {
   "name": "postcss-safe-important",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "PostCSS plugin that adds !important to style declarations safely",
   "keywords": [
     "postcss",
@@ -26,6 +26,9 @@
   "devDependencies": {
     "ava": "^0.7.0",
     "eslint": "^1.10.2"
+  },
+  "engines" : {
+    "node" : ">=4.0.0"
   },
   "scripts": {
     "test": "ava && eslint *.js"
