@@ -6,7 +6,7 @@ module.exports = postcss.plugin('postcss-reverse-props', options => {
     options = options || {};
     // default options
     var excludeRules = new Set();
-    var excludeAtRules = new Set(['keyframes']);
+    var excludeAtRules = new Set(['keyframes', 'font-face']);
     var excludeDecls = new Set([
         'animation',
         'animation-name',
