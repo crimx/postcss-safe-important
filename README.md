@@ -30,7 +30,7 @@ Whether you work with extreme CSS reset stylesheet like Cleanslate or simply jus
 
 Adding `!important` to every declarations might break your style. For example, [declarations in a keyframe that are qualified with `!important` are ignored](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes#!important_in_a_keyframe).
 
-[postcss-safe-important] will skip unnecessary declarations. You can also set your own exclusions through options or comments (see examples below).
+[postcss-safe-important] will skip [unnecessary declarations](#default-exclutions). You can also set your own exclusions through options or comments (see examples below).
 
 [postcss-safe-important]: https://github.com/Crimx/postcss-safe-important
 
@@ -135,9 +135,28 @@ You can pass either a **string**, an **array**(or anything with `forEach`), or a
 
 - `keepcomments`: **bool**, default `false`.
 
-See [PostCSS] docs for examples for your environment.
+## Default Exclutions
+
+### atrules
+
+- keyframes
+- font-face
+
+### declarations
+
+- animation
+- animation-name
+- animation-duration
+- animation-timing-function
+- animation-delay
+- animation-iteration-count
+- animation-direction
+- animation-fill-mode
+- animation-play-state
 
 ## [Change Log](CHANGELOG.md)
+
+See [PostCSS] docs for examples for your environment.
 
 ## [License](LICENSE)
 
