@@ -206,9 +206,9 @@ test('set single exculde rule with options', t => {
         color: red;
     }
 }
-@font-face {
-  font-family: MyHelvetica;
-  src: local("Helvetica");
+@an-atrule {
+  foo: bar;
+  baz: bar;
 }
 ------------------------------
 @media screen and (width: 480px) {
@@ -216,19 +216,19 @@ test('set single exculde rule with options', t => {
         color: red;
     }
 }
-@font-face {
-  font-family: MyHelvetica !important;
-  src: local("Helvetica") !important;
+@an-atrule {
+  foo: bar !important;
+  baz: bar !important;
 }
 */
 test('set single exculde atrules with function options', t => {
     return run(t,
         '@media screen and (width: 480px) {body {color: red;}}' +
-        '@font-face {font-family: MyHelvetica;' +
-        'src: local("Helvetica");}',
+        '@an-atrule {foo: bar;' +
+        'baz: bar;}',
         '@media screen and (width: 480px) {body {color: red;}}' +
-        '@font-face {font-family: MyHelvetica !important;' +
-        'src: local("Helvetica") !important;}',
+        '@an-atrule {foo: bar !important;' +
+        'baz: bar !important;}',
         { atrules: () => 'media' });
 });
 
