@@ -1,4 +1,9 @@
-# PostCSS Safe Important [![Build Status][ci-img]][ci] ![Node Version][node-img] [![Npm][npm-img]][npm]
+# PostCSS Safe Important
+
+[![Build Status][ci-img]][ci]
+[![Npm Downloads Total][dt-img]][npm]
+![Node Version][node-img]
+[![Npm][npm-img]][npm]
 
 [PostCSS] plugin that adds `!important` to style declarations safely.
 
@@ -7,6 +12,7 @@
 [ci]:       https://travis-ci.org/crimx/postcss-safe-important
 [npm-img]:  https://img.shields.io/npm/v/postcss-safe-important.svg
 [npm]:      https://www.npmjs.com/package/postcss-safe-important
+[dt-img]:   https://img.shields.io/npm/dt/postcss-safe-important.svg
 [node-img]: https://img.shields.io/npm/dm/postcss-safe-important.svg
 
 ## Why would I need it?
