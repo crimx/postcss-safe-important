@@ -2,7 +2,7 @@
 
 var postcss = require('postcss');
 
-module.exports = postcss.plugin('postcss-reverse-props', options => {
+module.exports = postcss.plugin('postcss-safe-important', options => {
     options = options || {};
     // default options
     var excludeRules = new Set();
