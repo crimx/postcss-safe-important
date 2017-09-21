@@ -32,13 +32,11 @@ module.exports = postcss.plugin('postcss-safe-important', options => {
             rules = [rules];
         }
         // handle array or anything iterable
-        if (rules.forEach) {
-            rules.forEach(r => {
-                if (typeof r === 'string') {
-                    set.add(r);
-                }
-            });
-        }
+        Array.from(rules).forEach(r => {
+            if (typeof r === 'string') {
+                set.add(r);
+            }
+        });
     }
     addOpts(options.selectors, excludeRules);
     addOpts(options.atrules, excludeAtRules);
@@ -53,8 +51,7 @@ module.exports = postcss.plugin('postcss-safe-important', options => {
             // check declation
             if (excludeDecls.has(stripPrefix(decl.prop))) return;
 
-            for (let node = decl.parent;
-              node.type !== 'root'; node = node.parent) {
+            for (let node = decl.parent; node.type !== 'root'; node = node.parent) {
                 // check selector
                 if (node.type === 'rule') {
                     if (excludeRules.has(stripPrefix(node.selector))) return;
