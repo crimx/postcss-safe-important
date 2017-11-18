@@ -2,6 +2,56 @@
 
 var postcss = require('postcss');
 
+/**
+ * @param {*} rules
+ * @param {Set} excludeSet
+ */
+function addExcludeItems(rules, excludeSet) {
+    if (!rules) return;
+
+    // handle function
+    if (typeof rules === 'function') {
+        rules = rules();
+    }
+
+    // handle single rule
+    if (typeof rules === 'string') {
+        rules = [rules];
+    }
+
+    // handle array or anything iterable
+    Array.from(rules).forEach(r => {
+        if (typeof r === 'string') {
+            excludeSet.add(r);
+        }
+    });
+}
+
+/**
+ * @param {string} path
+ * @param {*} excludePaths
+ */
+function isExcludePath(path, excludePaths) {
+    if (!excludePaths || !path) return false;
+
+    // handle single rule
+    if (typeof excludePaths === 'string') {
+        return path === excludePaths;
+    }
+
+    // handle RegExp
+    if (typeof excludePaths.test === 'function') {
+        return Boolean(excludePaths.test(path));
+    }
+
+    // handle function
+    if (typeof excludePaths === 'function') {
+        return Boolean(excludePaths(path));
+    }
+
+    return false;
+}
+
 module.exports = postcss.plugin('postcss-safe-important', options => {
     options = options || {};
     // default options
@@ -19,31 +69,14 @@ module.exports = postcss.plugin('postcss-safe-important', options => {
         'animation-play-state'
     ]);
 
-    // handle user options
-    function addOpts(rules, set) {
-        if (!rules) return;
-
-        // handle function
-        if (typeof rules === 'function') {
-            rules = rules();
-        }
-        // handle single rule
-        if (typeof rules === 'string') {
-            rules = [rules];
-        }
-        // handle array or anything iterable
-        Array.from(rules).forEach(r => {
-            if (typeof r === 'string') {
-                set.add(r);
-            }
-        });
-    }
-    addOpts(options.selectors, excludeRules);
-    addOpts(options.atrules, excludeAtRules);
-    addOpts(options.decls, excludeDecls);
+    addExcludeItems(options.selectors, excludeRules);
+    addExcludeItems(options.atrules, excludeAtRules);
+    addExcludeItems(options.decls, excludeDecls);
 
     // transform css
-    return css => {
+    return (css, result) => {
+        if (isExcludePath(result.opts.from, options.paths)) return;
+
         const commentChecker = /no !?important/i;
         const stripPrefix = name => name.replace(/^(-\w+?-)/i, '');
 
