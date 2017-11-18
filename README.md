@@ -83,6 +83,7 @@ postcss([ safeImportant({
     selectors: '#bar', // you can pass a string
     decls: ['height', 'width'], // or iterable
     atrules: () => 'media', // even a function
+    paths: p => p.startsWith(path.resolve(__dirname, '../node_modules')), // rule out paths
     keepcomments: false // all the `no important` comments will be erased
 }) ]);
 ```
@@ -134,26 +135,41 @@ If the comment is right behind(or below) a declaration, then only the declaratio
 
 ## Options
 
-### exclutions
+### Exclutions
 
 - `selectors`: excluded selectors
 - `decls`: excluded declarations
 - `atrules`: excluded atrules(e.g. `@font-face`)
 
-You can pass either a **string**, an **iterable**, or a **function** which returns string/array.
+You can pass either a **string**, an **iterable**, or a **function** that returns string/array.
 
-### keep `/* no important */` comments
+### Excluded paths
+
+- `paths`: a string(exact match), a RegExp(`test` is called) or a function that returns truthy or falsy value.
+
+If you want styles in node_modules left untouched, let's say your postcss config file is at project root:
+
+```js
+var safeImportant = require('postcss-safe-important');
+var path = require('path')
+
+postcss([ safeImportant({
+    paths: p => p.startsWith(path.resolve(__dirname, './node_modules'))
+}) ]);
+```
+
+### Keep `/* no important */` comments
 
 - `keepcomments`: **bool**, default `false`.
 
 ## Default Exclutions
 
-### atrules
+### Atrules
 
 - keyframes
 - font-face
 
-### declarations
+### Declarations
 
 - animation
 - animation-name
