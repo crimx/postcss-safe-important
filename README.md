@@ -17,7 +17,7 @@
 
 ## Why would I need it?
 
-> It's 2019 and you should probably look at shadow dom adn web components first.
+> It's 2019 and you should probably look at shadow dom and web components first.
 
 Quoted from [Cleanslate](http://cleanslatecss.com/#Why-would-I-need-it)
 
