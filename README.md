@@ -17,6 +17,8 @@
 
 ## Why would I need it?
 
+> It's 2019 and you should probably look at shadow dom adn web components first.
+
 Quoted from [Cleanslate](http://cleanslatecss.com/#Why-would-I-need-it)
 
 > When there are existing CSS styles on a page, and you want to prevent those styles cascading into some part of the page. This is not a stylesheet to use when developing your own website (for that, try [Eric Meyer’s classic “Reset CSS”](http://meyerweb.com/eric/tools/css/reset/) or the [“HTML5 Doctors’ adaptation”](http://html5doctor.com/html-5-reset-stylesheet).
@@ -161,6 +163,10 @@ postcss([ safeImportant({
 ### Keep `/* no important */` comments
 
 - `keepcomments`: **bool**, default `false`.
+
+### Clear Default Declarations
+
+- `clearDefaultDecls`: **bool**, default `false`.
 
 ## Default Exclutions
 
