@@ -53,21 +53,25 @@ function isExcludePath(path, excludePaths) {
 }
 
 module.exports = postcss.plugin('postcss-safe-important', options => {
-    options = options || {};
-    // default options
+    options = options || { clearDefaultDecls: false }; // default options
+
     var excludeRules = new Set();
     var excludeAtRules = new Set(['keyframes', 'font-face']);
-    var excludeDecls = new Set([
-        'animation',
-        'animation-name',
-        'animation-duration',
-        'animation-timing-function',
-        'animation-delay',
-        'animation-iteration-count',
-        'animation-direction',
-        'animation-fill-mode',
-        'animation-play-state'
-    ]);
+    var excludeDecls = new Set();
+
+    if (!options.clearDefaultDecls) {
+        addExcludeItems([
+            'animation',
+            'animation-name',
+            'animation-duration',
+            'animation-timing-function',
+            'animation-delay',
+            'animation-iteration-count',
+            'animation-direction',
+            'animation-fill-mode',
+            'animation-play-state'
+        ], excludeDecls);
+    }
 
     addExcludeItems(options.selectors, excludeRules);
     addExcludeItems(options.atrules, excludeAtRules);
