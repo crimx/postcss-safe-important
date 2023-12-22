@@ -8,8 +8,8 @@
 [PostCSS] plugin that adds `!important` to style declarations safely.
 
 [PostCSS]:  https://github.com/postcss/postcss
-[ci-img]:   https://travis-ci.org/crimx/postcss-safe-important.svg
-[ci]:       https://travis-ci.org/crimx/postcss-safe-important
+[ci-img]:   https://img.shields.io/github/actions/workflow/status/crimx/postcss-safe-important/build.yml
+[ci]:       https://github.com/crimx/postcss-safe-important/actions/workflows/build.yml
 [npm-img]:  https://img.shields.io/npm/v/postcss-safe-important.svg
 [npm]:      https://www.npmjs.com/package/postcss-safe-important
 [dt-img]:   https://img.shields.io/npm/dt/postcss-safe-important.svg
