@@ -17,7 +17,7 @@
 
 ## Why would I need it?
 
-> It's 2019 and you should probably look at shadow dom and web components first.
+> You should probably look at shadow dom and web components first.
 
 Quoted from [Cleanslate](http://cleanslatecss.com/#Why-would-I-need-it)
 
@@ -77,18 +77,26 @@ Adding `!important` to every declarations might break your style. For example, [
 $ npm install postcss-safe-important --save-dev
 ```
 
-```js
-var safeImportant = require('postcss-safe-important');
+### Example
 
-postcss([ safeImportant({
-    // options
-    selectors: '#bar', // you can pass a string
-    decls: ['height', 'width'], // or iterable
-    atrules: () => 'media', // even a function
-    paths: p => p.startsWith(path.resolve(__dirname, '../node_modules')), // rule out paths
-    keepcomments: false // all the `no important` comments will be erased
-}) ]);
+```js
+var safeImportant = require("postcss-safe-important");
+
+postcss([
+    safeImportant({
+        // options
+        excludeSelectors: "#bar", // config with string
+        excludeDeclarations: /color/, // config with regex
+        excludeCSSVariables: ["--width", "--height"], // config with array of string
+        excludeAtRules: (atRule) => atRule === "media", // config with function
+        excludePaths: p => p.startsWith(path.resolve(__dirname, "../node_modules")), // exclude paths
+        disableDefaultExcludes: false, // disable default exclusion lists
+        keepComments: true, // all the `no important` comments will be erased
+    }),
+]);
 ```
+
+See [tests](https://github.com/crimx/postcss-safe-important/blob/master/test.js) for more examples.
 
 ## Comments
 
@@ -139,36 +147,57 @@ If the comment is right behind(or below) a declaration, then only the declaratio
 
 ### Exclusions
 
-- `selectors`: excluded selectors
-- `decls`: excluded declarations
-- `atrules`: excluded atrules(e.g. `@font-face`)
+- `excludeSelectors`: exclude selectors. Default empty (default exclusions still applies unless `options.disableDefaultExcludes = true`)
+- `excludeDeclarations`: exclude declarations. Default empty (default exclusions still applies unless `options.disableDefaultExcludes = true`)
+- `excludeAtRules`: exclude atrules(e.g. `@font-face`). Default empty (default exclusions still applies unless `options.disableDefaultExcludes = true`)
+- `excludeCSSVariables`: exclude CSS variables. Default excludes all CSS Variables.
+- `excludePaths`. exclude style paths. Default empty.
 
-You can pass either a **string**, an **iterable**, or a **function** that returns string/array.
-
-### Excluded paths
-
-- `paths`: a string(exact match), a RegExp(`test` is called) or a function that returns truthy or falsy value.
-
-If you want styles in node_modules left untouched, let's say your postcss config file is at project root:
+You can pass either a **string**, a **regexp**, an **iterable**, or a `shouldExclude(rule: string): boolean` **function**.
 
 ```js
-var safeImportant = require('postcss-safe-important');
-var path = require('path')
+var safeImportant = require("postcss-safe-important");
 
-postcss([ safeImportant({
-    paths: p => p.startsWith(path.resolve(__dirname, './node_modules'))
-}) ]);
+postcss([
+    safeImportant({
+        // options
+        excludeSelectors: "#bar", // config with string
+        excludeDeclarations: /color/, // config with regex
+        excludeCSSVariables: ["--width", "--height"], // config with array of string
+        excludeAtRules: (atRule) => atRule === "media", // config with function
+        excludePaths: p => p.startsWith(path.resolve(__dirname, "../node_modules")), // exclude paths
+    }),
+]);
+```
+
+If you want styles in node_modules left untouched, let's say your postcss config file is at project root, you can:
+
+```js
+var safeImportant = require("postcss-safe-important");
+var path = require("path");
+
+postcss([
+    safeImportant({
+        excludePaths: p => p.startsWith(path.resolve(__dirname, "./node_modules")),
+    }),
+]);
 ```
 
 ### Keep `/* no important */` comments
 
-- `keepcomments`: **bool**, default `false`.
+- `keepComments`: **bool**, default `false`.
 
-### Clear Default Declarations
+### Disable Default Declarations
 
-- `clearDefaultDecls`: **bool**, default `false`.
+- `disableDefaultExcludes`: **bool**, default `false`.
+
+Disable the default exclusion list below.
 
 ## Default Exclusions
+
+### Variables
+
+All CSS variables.
 
 ### Atrules
 
