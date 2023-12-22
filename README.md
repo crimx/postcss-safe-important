@@ -96,7 +96,7 @@ postcss([
 ]);
 ```
 
-See [tests](https://github.com/crimx/postcss-safe-important/blob/master/test.js) for more examples.
+See [tests](https://github.com/crimx/postcss-safe-important/blob/main/test.js) for more examples.
 
 ## Comments
 
