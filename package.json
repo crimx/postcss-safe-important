@@ -1,6 +1,6 @@
 {
   "name": "postcss-safe-important",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "PostCSS plugin that adds !important to style declarations safely",
   "keywords": [
     "postcss",
